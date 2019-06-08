@@ -1,8 +1,12 @@
 import React from "react";
 import Proptypes from "prop-types";
+import Nav from "./Nav";
 
 const Header = (props) => (
-    <h1>{props.title}</h1>
+    <div>
+        <h1>{props.title}</h1>
+        <Nav></Nav>
+    </div>
 );
 
 Header.defaultProps = {
