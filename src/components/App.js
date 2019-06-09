@@ -28,7 +28,7 @@ class App extends Component {
     );
   }
 
-  async fetchPhotos(searchTag) {
+  fetchPhotos = async (searchTag) => {
     const response = await axios.get(
       `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${searchTag}&format=json&nojsoncallback=1&per_page=24`
     );
