@@ -8,18 +8,20 @@ const Gallery = ({ title, photos }) => {
   return (
     <div className="photo-container">
       <h2> {isEmpty ? "" : title} </h2>
-      {!isEmpty ? (
-        photos.map(photo => (
-          <GalleryItem
-            farm={photo.farm}
-            key={photo.id}
-            server={photo.server}
-            secret={photo.secret}
-          />
-        ))
-      ) : (
-        <NoResults />
-      )}
+      <ul>
+        {!isEmpty ? (
+            photos.map(photo => (
+            <GalleryItem
+                farm={photo.farm}
+                key={photo.id}
+                server={photo.server}
+                secret={photo.secret}
+            />
+            ))
+        ) : (
+            <NoResults />
+        )}
+      </ul>
     </div>
   );
 };
