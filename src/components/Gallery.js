@@ -17,6 +17,7 @@ const Gallery = ({ title, photos }) => {
               id={photo.id}
               server={photo.server}
               secret={photo.secret}
+              title={photo.title}
             />
           ))
         ) : (
