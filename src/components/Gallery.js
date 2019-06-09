@@ -14,6 +14,7 @@ const Gallery = ({ title, photos }) => {
             <GalleryItem
                 farm={photo.farm}
                 key={photo.id}
+                id={photo.id}
                 server={photo.server}
                 secret={photo.secret}
             />
