@@ -28,13 +28,19 @@ class App extends Component {
     );
   }
 
-  fetchPhotos = async (searchTag) => {
+  fetchPhotos = async searchTag => {
     const response = await axios.get(
       `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${searchTag}&format=json&nojsoncallback=1&per_page=24`
     );
     const { data } = await response;
     return data.photos.photo;
-  }
+  };
+
+  handleSearch = searchTerm => {
+    this.fetchPhotos(searchTerm).then(photos => {
+      this.setState({ searchData: photos });
+    });
+  };
 
   render() {
     return (
@@ -54,6 +60,13 @@ class App extends Component {
             path="/birds"
             render={() => (
               <Gallery title="Birds" photos={this.state.birdsData} />
+            )}
+          />
+
+          <Route
+            path="/search/:query"
+            render={() => (
+              <Gallery title="Results" photos={this.state.searchData} />
             )}
           />
         </div>
