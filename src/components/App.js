@@ -20,6 +20,8 @@ class App extends Component {
 
   componentDidMount(){
     this.fetchPhotos("cat").then((photos) => this.setState({catsData: photos}));
+    this.fetchPhotos("dogs").then((photos) => this.setState({dogsData: photos}));
+    this.fetchPhotos("birds").then((photos) => this.setState({birdsData: photos}));
   }
 
   async fetchPhotos(searchTag){
@@ -35,6 +37,8 @@ class App extends Component {
           <Header></Header>
           <Route exact path="/" render={() => (<Redirect to="/cats"></Redirect>)}></Route>
           <Route path="/cats" render={() => (<Gallery title="Cats" photos={this.state.catsData}></Gallery>)}></Route>
+          <Route path="/dogs" render={() => (<Gallery title="Dogs" photos={this.state.dogsData}></Gallery>)}></Route>
+          <Route path="/birds" render={() => (<Gallery title="Birds" photos={this.state.birdsData}></Gallery>)}></Route>
         </div>
       </BrowserRouter>
     );
