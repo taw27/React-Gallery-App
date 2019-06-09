@@ -10,17 +10,17 @@ const Gallery = ({ title, photos }) => {
       <h2> {isEmpty ? "" : title} </h2>
       <ul>
         {!isEmpty ? (
-            photos.map(photo => (
+          photos.map(photo => (
             <GalleryItem
-                farm={photo.farm}
-                key={photo.id}
-                id={photo.id}
-                server={photo.server}
-                secret={photo.secret}
+              farm={photo.farm}
+              key={photo.id}
+              id={photo.id}
+              server={photo.server}
+              secret={photo.secret}
             />
-            ))
+          ))
         ) : (
-            <NoResults />
+          <NoResults />
         )}
       </ul>
     </div>

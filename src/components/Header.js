@@ -2,18 +2,18 @@ import React from "react";
 import Proptypes from "prop-types";
 import Nav from "./Nav";
 
-const Header = (props) => (
-    <div>
-        <h1>{props.title}</h1>
-        <Nav></Nav>
-    </div>
+const Header = props => (
+  <div>
+    <h1>{props.title}</h1>
+    <Nav />
+  </div>
 );
 
 Header.defaultProps = {
-    title: "Reeact Gallery App"
-}
+  title: "Reeact Gallery App"
+};
 
 Header.propTypes = {
-    title: Proptypes.string
-}
+  title: Proptypes.string
+};
 export default Header;
