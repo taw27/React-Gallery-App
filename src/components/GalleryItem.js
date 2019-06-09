@@ -1,10 +1,10 @@
 import React from "react";
 import Proptypes from "prop-types";
 
-const GalleryItem = ({farm, server, key, secret}) =>{
+const GalleryItem = ({farm, server, id, secret}) =>{
     return(
         <li>
-            <img src={`https://farm${farm}.staticflickr.com/${server}/${key}_${secret}.jpg`} alt="gallery-image" />
+            <img src={`https://farm${farm}.staticflickr.com/${server}/${id}_${secret}.jpg`} alt="gallery-image" />
         </li>
     );
 };
@@ -12,7 +12,7 @@ const GalleryItem = ({farm, server, key, secret}) =>{
 GalleryItem.propTypes = {
     farm: Proptypes.number,
     server: Proptypes.string,
-    key: Proptypes.string,
+    id: Proptypes.string,
     secret: Proptypes.string
 }
 
