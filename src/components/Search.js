@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 class Search extends Component{
     constructor({handleSearch}){
-        super({handleSearch});
+        super(handleSearch);
         this.state={
             searchValue: ""
         }
