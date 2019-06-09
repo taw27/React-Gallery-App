@@ -13,7 +13,7 @@ GalleryItem.propTypes = {
     farm: Proptypes.number,
     server: Proptypes.string,
     key: Proptypes.string,
-    secret: Proptypes.secret
+    secret: Proptypes.string
 }
 
 export default GalleryItem;
