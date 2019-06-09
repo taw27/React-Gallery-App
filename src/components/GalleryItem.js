@@ -16,7 +16,7 @@ GalleryItem.propTypes = {
   farm: Proptypes.number,
   server: Proptypes.string,
   id: Proptypes.string,
-  secret: Proptypes.string
+  secret: Proptypes.string,
   title: Proptypes.string
 };
 
