@@ -31,7 +31,7 @@ class App extends Component {
   render(){
     return (
       <BrowserRouter>
-        <div className="App">
+        <div className="container">
           <Header></Header>
           <Route exact path="/" render={() => (<Redirect to="/cats"></Redirect>)}></Route>
           <Route path="/cats" render={() => (<Gallery title="Cats" photos={this.state.catsData}></Gallery>)}></Route>
