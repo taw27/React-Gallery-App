@@ -1,21 +1,28 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
+import { withRouter } from "react-router";
 
 class Search extends Component{
-    constructor({handleSearch}){
-        super(handleSearch);
+    constructor(props){
+        super(props);
         this.state={
             searchValue: ""
         }
         
-        this.handleSearch = handleSearch;
+        this.handleSearch = props.handleSearch;
     }
 
     handleChange = (event) => this.setState({searchValue: event.target.value});
 
+    onSearchSubmit = (event) => {
+        event.preventDefault();
+        this.handleSearch(this.state.searchValue);
+        this.props.history.push(`/search/${this.state.searchValue}`);
+    };
+
     render(){
         return (
-            <form className="search-form">
+            <form className="search-form" onSubmit={this.onSearchSubmit}>
                 <input type="search" name="search" placeholder="Search" onChange={this.handleChange} required/>
                 <button type="submit" className="search-button" onSubmit={() => this.handleSearch(this.state.searchValue)}>
                 <svg fill="#fff" height="24" viewBox="0 0 23 23" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -29,7 +36,8 @@ class Search extends Component{
 }
 
 Search.propTypes = {
-    handleSearch: PropTypes.func
+    handleSearch: PropTypes.func,
+    history: PropTypes.object
 }
 
-export default Search;
+export default withRouter(Search);
