@@ -46,7 +46,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="container">
-          <Header />
+          <Header handleSearch={this.handleSearch}/>
           <Route exact path="/" render={() => <Redirect to="/cats" />} />
           <Route
             path="/cats"
