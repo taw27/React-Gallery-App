@@ -1,4 +1,4 @@
-import React from "react-dom";
+import React from "react";
 import Proptypes from "prop-types";
 
 const GalleryItem = ({farm, server, key, secret}) =>{

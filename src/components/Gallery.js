@@ -1,4 +1,4 @@
-import React from "react-dom";
+import React from "react";
 import Proptypes from "prop-types";
 import GalleryItem from "./GalleryItem";
 import NoResults from "./NoResults";
