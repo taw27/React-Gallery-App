@@ -65,6 +65,7 @@ class App extends Component {
         <Header handleSearch={this.handleSearch} />
         <Switch>
           <Route exact path="/" render={() => <Redirect to="/cats" />} />
+          <Route exact path="/Search" render={() => <Redirect to="/" />} />
           <Route
             path="/search/"
             render={({ location }) => {
