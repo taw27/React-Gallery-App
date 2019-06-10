@@ -56,25 +56,26 @@ class App extends Component {
 
           <Switch>
             <Route exact path="/" render={() => <Redirect to="/cats" />} />
-
             <Route
               path="/search"
               render={({ location }) => {
-                return queryString.parse(location.search).query ? (
-                  <Gallery
-                    title="Search Results"
-                    photos={this.state.searchData}
-                    location={location}
-                    fetchSearchImages={this.handleSearch}
-                  />
-                ) : (
-                  <ul>
-                    <MessageLi
-                      errorTitle={errorTitle}
-                      errorMessage={errorMessage}
+                const isCorrectQuery= queryString.parse(location.search).query;
+                  return isCorrectQuery ? (
+                    <Gallery
+                      title="Search Results"
+                      photos={this.state.searchData}
+                      location={location}
+                      fetchSearchImages={this.handleSearch}
                     />
-                  </ul>
-                );
+                  ) : (
+                    <ul>
+                      <MessageLi
+                        messageTitle={errorTitle}
+                        messageText={errorMessage}
+                      />
+                    </ul>
+                  );
+                
               }}
             />
 
