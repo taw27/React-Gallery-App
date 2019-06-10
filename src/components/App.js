@@ -1,12 +1,13 @@
 import React, { Component } from "react";
-import Header from "./Header";
 import "../index.css";
 import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
-import Gallery from "./Gallery";
-import NoResults from "./NoResults";
 import axios from "axios";
 import apiKey from "../config";
 import queryString from "query-string";
+import Gallery from "./Gallery";
+import Header from "./Header";
+import NoResults from "./NoResults";
+
 
 class App extends Component {
   constructor() {
@@ -54,39 +55,6 @@ class App extends Component {
           <Header handleSearch={this.handleSearch} />
           <Switch>
             <Route exact path="/" render={() => <Redirect to="/cats" />} />
-            <Route
-              path="/cats"
-              render={({ location }) => (
-                <Gallery
-                  title="Cats"
-                  photos={this.state.catsData}
-                  location={location}
-                  fetchSearchImages={this.handleSearch}
-                />
-              )}
-            />
-            <Route
-              path="/dogs"
-              render={({ location }) => (
-                <Gallery
-                  title="Dogs"
-                  photos={this.state.dogsData}
-                  location={location}
-                  fetchSearchImages={this.handleSearch}
-                />
-              )}
-            />
-            <Route
-              path="/birds"
-              render={({ location }) => (
-                <Gallery
-                  title="Birds"
-                  photos={this.state.birdsData}
-                  location={location}
-                  fetchSearchImages={this.handleSearch}
-                />
-              )}
-            />
 
             <Route
               path="/search"
@@ -95,6 +63,28 @@ class App extends Component {
                   <Gallery
                     title="Results"
                     photos={this.state.searchData}
+                    location={location}
+                    fetchSearchImages={this.handleSearch}
+                  />
+                ) : (
+                  <NoResults
+                    errorTitle={errorTitle}
+                    errorMessage={errorMessage}
+                  />
+                );
+              }}
+            />
+
+            <Route
+              path="/:defaultRoute"
+              render={({ location, match }) => {
+                const routeParam = match.params.defaultRoute.toLowerCase();
+                return routeParam === "cats" ||
+                  routeParam === "dogs" ||
+                  routeParam === "birds" ? (
+                  <Gallery
+                    title={routeParam[0].toUpperCase() + routeParam.slice[1]}
+                    photos={this.state[`${routeParam}Data`]}
                     location={location}
                     fetchSearchImages={this.handleSearch}
                   />
