@@ -17,6 +17,8 @@ class Gallery extends Component {
   render() {
     const { photos, title } = this.props;
     const isEmpty = !(photos.length > 0);
+    const errorMessage = "You search did not return any results. Please try a different query" ;
+    const errorTitle= "No Results Found";
     return (
       <div className="photo-container">
         <h2> {isEmpty ? "" : title} </h2>
@@ -33,7 +35,7 @@ class Gallery extends Component {
               />
             ))
           ) : (
-            <NoResults />
+            <NoResults errorTitle={errorTitle} errorMessage={errorMessage}/>
           )}
         </ul>
       </div>
