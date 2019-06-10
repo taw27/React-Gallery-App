@@ -34,8 +34,6 @@ const Gallery = ({ photos, title }) => {
 Gallery.propTypes = {
   title: Proptypes.string,
   photos: Proptypes.array,
-  location: Proptypes.object,
-  fetchSearchImages: Proptypes.func
 };
 
 export default Gallery;
