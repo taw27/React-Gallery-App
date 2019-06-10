@@ -50,23 +50,23 @@ class App extends Component {
           <Route exact path="/" render={() => <Redirect to="/cats" />} />
           <Route
             path="/cats"
-            render={() => <Gallery title="Cats" photos={this.state.catsData} />}
+            render={({location}) => <Gallery title="Cats" photos={this.state.catsData} location={location} fetchSearchImages={this.handleSearch} />}
           />
           <Route
             path="/dogs"
-            render={() => <Gallery title="Dogs" photos={this.state.dogsData} />}
+            render={({location}) => <Gallery title="Dogs" photos={this.state.dogsData} location={location} fetchSearchImages={this.handleSearch} />}
           />
           <Route
             path="/birds"
-            render={() => (
-              <Gallery title="Birds" photos={this.state.birdsData} />
+            render={({location}) => (
+              <Gallery title="Birds" photos={this.state.birdsData} location={location} fetchSearchImages={this.handleSearch} />
             )}
           />
 
           <Route
-            path="/search/:query"
-            render={() => (
-              <Gallery title="Results" photos={this.state.searchData} />
+            path="/search"
+            render={({location}) => (
+              <Gallery title="Results" photos={this.state.searchData} location={location} fetchSearchImages={this.handleSearch}/>
             )}
           />
         </div>
