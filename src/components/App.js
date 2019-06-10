@@ -43,7 +43,6 @@ class App extends Component {
     const values = queryString.parse(location.search);
 
     if (values.query) {
-      console.log(values.query);
       this.handleSearch(values.query);
     }
   }
@@ -59,7 +58,6 @@ class App extends Component {
   handleSearch = searchTerm => {
     this.setState({ isLoading: true });
     this.fetchPhotos(searchTerm).then(photos => {
-      console.log("here");
       this.setState({ searchData: photos, isLoading: false });
     });
   };
