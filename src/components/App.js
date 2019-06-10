@@ -66,7 +66,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" render={() => <Redirect to="/cats" />} />
           <Route
-            path="/search"
+            path="/search/"
             render={({ location }) => {
               const isCorrectQuery = queryString.parse(location.search).query;
               if (this.state.isLoading) {
