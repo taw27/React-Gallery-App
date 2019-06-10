@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Proptypes from "prop-types";
 import GalleryItem from "./GalleryItem";
-import NoResults from "./NoResults";
+import MessageLi from "./MessageLi";
 import queryString from "query-string";
 
 class Gallery extends Component {
@@ -35,7 +35,7 @@ class Gallery extends Component {
               />
             ))
           ) : (
-            <NoResults errorTitle={errorTitle} errorMessage={errorMessage}/>
+            <MessageLi messageTitle={errorTitle} messageText={errorMessage}/>
           )}
         </ul>
       </div>
