@@ -5,15 +5,6 @@ import MessageLi from "./MessageLi";
 import queryString from "query-string";
 
 class Gallery extends Component {
-  componentDidMount() {
-    const { location, fetchSearchImages } = this.props;
-
-    if (location.search) {
-      const values = queryString.parse(this.props.location.search);
-      fetchSearchImages(values.query);
-    }
-  }
-
   render() {
     const { photos, title } = this.props;
     const isEmpty = !(photos.length > 0);
