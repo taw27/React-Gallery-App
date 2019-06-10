@@ -10,6 +10,7 @@ const Gallery = ({ photos, title }) => {
   const errorTitle = "No Results Found";
   return (
     <div className="photo-container">
+      {/* Renders the GallerItems components for each photo in Phtos prop. If photos prop is empty renders No results mesage */}
       <h2> {isEmpty ? "" : title} </h2>
       <ul>
         {!isEmpty ? (
@@ -31,9 +32,10 @@ const Gallery = ({ photos, title }) => {
   );
 };
 
+// prop validations
 Gallery.propTypes = {
   title: Proptypes.string,
-  photos: Proptypes.array,
+  photos: Proptypes.array
 };
 
 export default Gallery;

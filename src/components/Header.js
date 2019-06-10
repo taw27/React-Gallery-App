@@ -3,14 +3,18 @@ import Proptypes from "prop-types";
 import Nav from "./Nav";
 import Search from "./Search";
 
-const Header = ({title, handleSearch}) => (
+/* 
+Renders titel, search and nav components
+ */
+const Header = ({ title, handleSearch }) => (
   <div>
     <h1>{title}</h1>
-    <Search handleSearch={handleSearch}></Search>
+    <Search handleSearch={handleSearch} />
     <Nav />
   </div>
 );
 
+// Prop validations and defaults
 Header.defaultProps = {
   title: "Reeact Gallery App"
 };

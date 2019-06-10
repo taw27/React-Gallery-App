@@ -2,6 +2,7 @@ import React from "react";
 import Proptypes from "prop-types";
 
 const GalleryItem = ({ farm, server, id, secret, title }) => {
+  /* Renders an  in an li based on props */
   return (
     <li>
       <img
@@ -12,6 +13,7 @@ const GalleryItem = ({ farm, server, id, secret, title }) => {
   );
 };
 
+// Props validations
 GalleryItem.propTypes = {
   farm: Proptypes.number,
   server: Proptypes.string,
