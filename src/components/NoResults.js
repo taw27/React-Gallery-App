@@ -1,10 +1,16 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-const NoResults = () => (
+const NoResults = ({errorTitle, errorMessage}) => (
   <li className="not-found">
-    <h3>No Results Found</h3>
-    <p>You search did not return any results. Please try again.</p>
+    <h3>{errorTitle}</h3>
+    <p>{errorMessage}</p>
   </li>
 );
+
+NoResults.propTypes = {
+  errorTitle: PropTypes.string,
+  errorMessage: PropTypes.string
+}
 
 export default NoResults;
