@@ -89,7 +89,7 @@ input {
   transform: scale(1.65);
 }
 
-.photo-container .not-found {
+.photo-container .message {
   width: 100%;
 }
 
