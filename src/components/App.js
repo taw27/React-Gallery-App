@@ -61,7 +61,7 @@ class App extends Component {
               render={({ location }) => {
                 return queryString.parse(location.search).query ? (
                   <Gallery
-                    title="Results"
+                    title="Search Results"
                     photos={this.state.searchData}
                     location={location}
                     fetchSearchImages={this.handleSearch}
