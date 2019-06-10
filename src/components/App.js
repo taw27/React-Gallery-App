@@ -1,16 +1,17 @@
 import React, { Component } from "react";
 import "../index.css";
-import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
+import { Route, Redirect, Switch } from "react-router-dom";
 import axios from "axios";
 import apiKey from "../config";
+import Proptypes from "prop-types";
 import queryString from "query-string";
 import Gallery from "./Gallery";
 import Header from "./Header";
 import MessageLi from "./MessageLi";
 
 class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       searchData: [],
@@ -28,6 +29,14 @@ class App extends Component {
     this.fetchPhotos("birds").then(photos =>
       this.setState({ birdsData: photos })
     );
+
+    const { location } = this.props;
+    const values = queryString.parse(location.search);
+
+    if (values.query) {
+      console.log(values.query);
+      this.handleSearch(values.query);
+    }
   }
 
   fetchPhotos = async searchTag => {
@@ -50,7 +59,6 @@ class App extends Component {
     const errorMessage = "Requested Page Not Found";
 
     return (
-      <BrowserRouter>
         <div className="container">
           <Header handleSearch={this.handleSearch} />
 
@@ -115,9 +123,12 @@ class App extends Component {
             />
           </Switch>
         </div>
-      </BrowserRouter>
     );
   }
 }
+
+App.propTypes = {
+  location: Proptypes.object,
+};
 
 export default App;
