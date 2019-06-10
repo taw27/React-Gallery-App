@@ -17,7 +17,8 @@ class App extends Component {
       searchData: [],
       catsData: [],
       dogsData: [],
-      birdsData: []
+      birdsData: [],
+      isLoading: false
     };
   }
 
@@ -40,8 +41,9 @@ class App extends Component {
   };
 
   handleSearch = searchTerm => {
+    this.setState({isLoading: true});
     this.fetchPhotos(searchTerm).then(photos => {
-      this.setState({ searchData: photos });
+      this.setState({ searchData: photos, isLoading: false });
     });
   };
 
@@ -66,7 +68,7 @@ class App extends Component {
                     location={location}
                     fetchSearchImages={this.handleSearch}
                   />
-                ) : (
+                ) : (  
                   <NoResults
                     errorTitle={errorTitle}
                     errorMessage={errorMessage}
