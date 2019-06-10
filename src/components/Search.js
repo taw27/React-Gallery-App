@@ -17,7 +17,7 @@ class Search extends Component{
     onSearchSubmit = (event) => {
         event.preventDefault();
         this.handleSearch(this.state.searchValue);
-        this.props.history.push(`/search/?query=${this.state.searchValue}`);
+        this.props.history.push(`/search/all?query=${this.state.searchValue}`);
     };
 
     render(){
