@@ -38,7 +38,7 @@ class App extends Component {
     return data.photos.photo;
   };
 
-  handleSearch = aync (searchTerm => {
+  handleSearch = searchTerm => {
     this.fetchPhotos(searchTerm).then(photos => {
       console.log("here");
       this.setState({ searchData: photos});
