@@ -83,7 +83,7 @@ class App extends Component {
                   routeParam === "dogs" ||
                   routeParam === "birds" ? (
                   <Gallery
-                    title={routeParam[0].toUpperCase() + routeParam.slice[1]}
+                    title={routeParam[0].toUpperCase() + routeParam.slice(1)}
                     photos={this.state[`${routeParam}Data`]}
                     location={location}
                     fetchSearchImages={this.handleSearch}
