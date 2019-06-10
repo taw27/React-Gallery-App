@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import Header from "./Header";
 import "../index.css";
-import { BrowserRouter, Route, Redirect } from "react-router-dom";
+import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
 import Gallery from "./Gallery";
+import NoResults from "./NoResults";
 import axios from "axios";
 import apiKey from "../config";
+import queryString from "query-string";
 
 class App extends Component {
   constructor() {
@@ -43,32 +45,77 @@ class App extends Component {
   };
 
   render() {
+    const errorTitle = "404 Not Found";
+    const errorMessage = "Requested Page Not Found";
+
     return (
       <BrowserRouter>
         <div className="container">
-          <Header handleSearch={this.handleSearch}/>
-          <Route exact path="/" render={() => <Redirect to="/cats" />} />
-          <Route
-            path="/cats"
-            render={({location}) => <Gallery title="Cats" photos={this.state.catsData} location={location} fetchSearchImages={this.handleSearch} />}
-          />
-          <Route
-            path="/dogs"
-            render={({location}) => <Gallery title="Dogs" photos={this.state.dogsData} location={location} fetchSearchImages={this.handleSearch} />}
-          />
-          <Route
-            path="/birds"
-            render={({location}) => (
-              <Gallery title="Birds" photos={this.state.birdsData} location={location} fetchSearchImages={this.handleSearch} />
-            )}
-          />
+          <Header handleSearch={this.handleSearch} />
+          <Switch>
+            <Route exact path="/" render={() => <Redirect to="/cats" />} />
+            <Route
+              path="/cats"
+              render={({ location }) => (
+                <Gallery
+                  title="Cats"
+                  photos={this.state.catsData}
+                  location={location}
+                  fetchSearchImages={this.handleSearch}
+                />
+              )}
+            />
+            <Route
+              path="/dogs"
+              render={({ location }) => (
+                <Gallery
+                  title="Dogs"
+                  photos={this.state.dogsData}
+                  location={location}
+                  fetchSearchImages={this.handleSearch}
+                />
+              )}
+            />
+            <Route
+              path="/birds"
+              render={({ location }) => (
+                <Gallery
+                  title="Birds"
+                  photos={this.state.birdsData}
+                  location={location}
+                  fetchSearchImages={this.handleSearch}
+                />
+              )}
+            />
 
-          <Route
-            path="/search"
-            render={({location}) => (
-              <Gallery title="Results" photos={this.state.searchData} location={location} fetchSearchImages={this.handleSearch}/>
-            )}
-          />
+            <Route
+              path="/search"
+              render={({ location }) => {
+                return queryString.parse(location.search).query ? (
+                  <Gallery
+                    title="Results"
+                    photos={this.state.searchData}
+                    location={location}
+                    fetchSearchImages={this.handleSearch}
+                  />
+                ) : (
+                  <NoResults
+                    errorTitle={errorTitle}
+                    errorMessage={errorMessage}
+                  />
+                );
+              }}
+            />
+
+            <Route
+              render={() => (
+                <NoResults
+                  errorTitle={errorTitle}
+                  errorMessage={errorMessage}
+                />
+              )}
+            />
+          </Switch>
         </div>
       </BrowserRouter>
     );
