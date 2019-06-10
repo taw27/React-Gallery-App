@@ -103,6 +103,7 @@ class App extends Component {
             />
 
             <Route
+              exact
               path="/:defaultRoute"
               render={({ location, match }) => {
                 const routeParam = match.params.defaultRoute.toLowerCase();
