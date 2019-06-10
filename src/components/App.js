@@ -23,13 +23,21 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.fetchPhotos("cat").then(photos => this.setState({ catsData: photos }));
-    this.fetchPhotos("dogs").then(photos =>
-      this.setState({ dogsData: photos })
-    );
-    this.fetchPhotos("birds").then(photos =>
-      this.setState({ birdsData: photos })
-    );
+    this.setState({ isLoading: true });
+
+    Promise.all([
+      this.fetchPhotos("cat").then(photos =>
+        this.setState({ catsData: photos })
+      ),
+      this.fetchPhotos("dogs").then(photos =>
+        this.setState({ dogsData: photos })
+      ),
+      this.fetchPhotos("birds").then(photos =>
+        this.setState({ birdsData: photos })
+      )
+    ]).then(() => {
+      this.setState({ isLoading: false });
+    });
 
     const { location } = this.props;
     const values = queryString.parse(location.search);
@@ -63,76 +71,75 @@ class App extends Component {
     return (
       <div className="container">
         <Header handleSearch={this.handleSearch} />
-        <Switch>
-          <Route exact path="/" render={() => <Redirect to="/cats" />} />
-          <Route exact path="/Search" render={() => <Redirect to="/" />} />
-          <Route
-            path="/search/"
-            render={({ location }) => {
-              const isCorrectQuery = queryString.parse(location.search).query;
-              if (this.state.isLoading) {
-                return (
+        {this.state.isLoading ? (
+          <ul>
+            <MessageLi
+              messageTitle="Loading..."
+              messageText="Fetching Images"
+            />
+          </ul>
+        ) : (
+          <Switch>
+            <Route exact path="/" render={() => <Redirect to="/cats" />} />
+            <Route exact path="/Search" render={() => <Redirect to="/" />} />
+            <Route
+              path="/search/"
+              render={({ location }) => {
+                const isCorrectQuery = queryString.parse(location.search).query;
+                return isCorrectQuery ? (
+                  <Gallery
+                    title="Search Results"
+                    photos={this.state.searchData}
+                    location={location}
+                    fetchSearchImages={this.handleSearch}
+                  />
+                ) : (
                   <ul>
                     <MessageLi
-                      messageTitle="Loading..."
-                      messageText="Fetching Images"
+                      messageTitle={errorTitle}
+                      messageText={errorMessage}
                     />
                   </ul>
                 );
-              }
-              return isCorrectQuery ? (
-                <Gallery
-                  title="Search Results"
-                  photos={this.state.searchData}
-                  location={location}
-                  fetchSearchImages={this.handleSearch}
-                />
-              ) : (
+              }}
+            />
+
+            <Route
+              path="/:defaultRoute"
+              render={({ location, match }) => {
+                const routeParam = match.params.defaultRoute.toLowerCase();
+                return routeParam === "cats" ||
+                  routeParam === "dogs" ||
+                  routeParam === "birds" ? (
+                  <Gallery
+                    title={routeParam[0].toUpperCase() + routeParam.slice(1)}
+                    photos={this.state[`${routeParam}Data`]}
+                    location={location}
+                    fetchSearchImages={this.handleSearch}
+                  />
+                ) : (
+                  <ul>
+                    <MessageLi
+                      messageTitle={errorTitle}
+                      messageText={errorMessage}
+                    />
+                  </ul>
+                );
+              }}
+            />
+
+            <Route
+              render={() => (
                 <ul>
                   <MessageLi
                     messageTitle={errorTitle}
                     messageText={errorMessage}
                   />
                 </ul>
-              );
-            }}
-          />
-
-          <Route
-            path="/:defaultRoute"
-            render={({ location, match }) => {
-              const routeParam = match.params.defaultRoute.toLowerCase();
-              return routeParam === "cats" ||
-                routeParam === "dogs" ||
-                routeParam === "birds" ? (
-                <Gallery
-                  title={routeParam[0].toUpperCase() + routeParam.slice(1)}
-                  photos={this.state[`${routeParam}Data`]}
-                  location={location}
-                  fetchSearchImages={this.handleSearch}
-                />
-              ) : (
-                <ul>
-                  <MessageLi
-                    messageTitle={errorTitle}
-                    messageText={errorMessage}
-                  />
-                </ul>
-              );
-            }}
-          />
-
-          <Route
-            render={() => (
-              <ul>
-                <MessageLi
-                  messageTitle={errorTitle}
-                  messageText={errorMessage}
-                />
-              </ul>
-            )}
-          />
-        </Switch>
+              )}
+            />
+          </Switch>
+        )}
       </div>
     );
   }
