@@ -6,8 +6,7 @@ import apiKey from "../config";
 import queryString from "query-string";
 import Gallery from "./Gallery";
 import Header from "./Header";
-import NoResults from "./NoResults";
-
+import MessageLi from "./MessageLi";
 
 class App extends Component {
   constructor() {
@@ -18,7 +17,6 @@ class App extends Component {
       catsData: [],
       dogsData: [],
       birdsData: [],
-      isLoading: false
     };
   }
 
@@ -40,10 +38,10 @@ class App extends Component {
     return data.photos.photo;
   };
 
-  handleSearch = searchTerm => {
-    this.setState({isLoading: true});
+  handleSearch = aync (searchTerm => {
     this.fetchPhotos(searchTerm).then(photos => {
-      this.setState({ searchData: photos, isLoading: false });
+      console.log("here");
+      this.setState({ searchData: photos});
     });
   };
 
@@ -55,6 +53,7 @@ class App extends Component {
       <BrowserRouter>
         <div className="container">
           <Header handleSearch={this.handleSearch} />
+
           <Switch>
             <Route exact path="/" render={() => <Redirect to="/cats" />} />
 
@@ -68,11 +67,13 @@ class App extends Component {
                     location={location}
                     fetchSearchImages={this.handleSearch}
                   />
-                ) : (  
-                  <NoResults
-                    errorTitle={errorTitle}
-                    errorMessage={errorMessage}
-                  />
+                ) : (
+                  <ul>
+                    <MessageLi
+                      errorTitle={errorTitle}
+                      errorMessage={errorMessage}
+                    />
+                  </ul>
                 );
               }}
             />
@@ -91,20 +92,24 @@ class App extends Component {
                     fetchSearchImages={this.handleSearch}
                   />
                 ) : (
-                  <NoResults
-                    errorTitle={errorTitle}
-                    errorMessage={errorMessage}
-                  />
+                  <ul>
+                    <MessageLi
+                      messageTitle={errorTitle}
+                      messageText={errorMessage}
+                    />
+                  </ul>
                 );
               }}
             />
 
             <Route
               render={() => (
-                <NoResults
-                  errorTitle={errorTitle}
-                  errorMessage={errorMessage}
-                />
+                <ul>
+                  <MessageLi
+                    messageTitle={errorTitle}
+                    messageText={errorMessage}
+                  />
+                </ul>
               )}
             />
           </Switch>
