@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Proptypes from "prop-types";
 import GalleryItem from "./GalleryItem";
 import MessageLi from "./MessageLi";
-import queryString from "query-string";
 
 class Gallery extends Component {
   render() {
