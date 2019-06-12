@@ -14,6 +14,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Running Instructions
 
 1. Download or clone the repository
+2. Include a config.js folder in the src folder with your own flickr api key exported 
 2. Open Terminal in the project directory
 3. Run npm install to install dependencies
 4. Run npm start to start the react application
