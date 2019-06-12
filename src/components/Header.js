@@ -16,7 +16,7 @@ const Header = ({ title, handleSearch }) => (
 
 // Prop validations and defaults
 Header.defaultProps = {
-  title: "Reeact Gallery App"
+  title: "React Gallery App"
 };
 
 Header.propTypes = {
