@@ -108,8 +108,6 @@ class App extends Component {
                   <Gallery
                     title="Search Results"
                     photos={this.state.searchData}
-                    location={location}
-                    fetchSearchImages={this.handleSearch}
                   />
                 ) : (
                   <ul>
@@ -126,7 +124,7 @@ class App extends Component {
             <Route
               exact
               path="/:defaultRoute"
-              render={({ location, match }) => {
+              render={({ match }) => {
                 const routeParam = match.params.defaultRoute.toLowerCase();
                 return routeParam === "cats" ||
                   routeParam === "dogs" ||
@@ -134,8 +132,6 @@ class App extends Component {
                   <Gallery
                     title={routeParam[0].toUpperCase() + routeParam.slice(1)}
                     photos={this.state[`${routeParam}Data`]}
-                    location={location}
-                    fetchSearchImages={this.handleSearch}
                   />
                 ) : (
                   <ul>
